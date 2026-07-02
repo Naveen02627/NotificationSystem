@@ -79,3 +79,27 @@ The **Consumer** picks up the event, updates the status, uses a **Factory** to s
 ---
 
 ## 📁 Project Structure
+
+NotificationSystem/
+├── NotificationProducer/ # REST API module
+│ ├── src/main/java/com/.../producer/
+│ │ ├── controller/ # API endpoints
+│ │ ├── entity/ # JPA entities
+│ │ ├── repository/ # Spring Data repositories
+│ │ ├── service/ # Business logic
+│ │ └── kafka/ # Kafka producer config
+│ ├── src/main/resources/
+│ │ └── application.properties
+│ └── pom.xml
+├── NotificationConsumer/ # Kafka consumer module
+│ ├── src/main/java/com/.../consumer/
+│ │ ├── consumer/ # Kafka listener
+│ │ ├── notification/ # Factory & Senders
+│ │ ├── entity/
+│ │ ├── repository/
+│ │ └── config/
+│ ├── src/main/resources/
+│ │ └── application.properties
+│ └── pom.xml
+├── docker-compose.yml # Local infrastructure
+└── README.md
