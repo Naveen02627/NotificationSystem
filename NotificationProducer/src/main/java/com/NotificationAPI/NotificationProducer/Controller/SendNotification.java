@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/notification")
+@CrossOrigin(origins = "*")
 public class SendNotification {
 
     private final NotificationProducer notificationProducer;
