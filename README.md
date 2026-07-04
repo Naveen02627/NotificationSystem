@@ -54,9 +54,8 @@ By separating the **Producer** and **Consumer**, the system achieves:
 
 ## 🏗 Architecture Diagram
 
-> *(Place your architecture diagram at `assets/architecture.png` and remove this line)*  
 
-![Architecture Diagram](assets/architecture.png)
+![Architecture Diagram](https://github.com/Naveen02627/NotificationSystem/blob/main/ScreenShots/tp.png)
 
 The **Producer** receives a REST request, saves the notification in PostgreSQL, and publishes an event to Kafka.  
 The **Consumer** picks up the event, updates the status, uses a **Factory** to select the appropriate sender (Email, SMS, etc.), and delivers the notification. Failed attempts are retried automatically and eventually moved to a Dead Letter Queue if they keep failing.
