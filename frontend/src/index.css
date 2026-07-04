@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* ===========================================================
+   Design tokens — "Dispatch" visual system
+   Derived from the existing bolt mark (violet/blue) already
+   present in public/favicon.svg — extended into a full palette.
+   =========================================================== */
+:root {
+  --ink: #14121f;
+  --ink-soft: #5b5770;
+  --ink-faint: #948fac;
+
+  --bg: #f6f5fb;
+  --surface: #ffffff;
+  --border: #e7e3f3;
+  --border-strong: #d8d2ec;
+
+  --accent: #7c3aed;
+  --accent-dark: #5f21c9;
+  --accent-soft: #f1e9ff;
+  --accent-blue: #2e9bff;
+
+  --success: #17a673;
+  --success-bg: #e8f8f1;
+  --success-border: #bfe9d7;
+
+  --error: #e5484d;
+  --error-bg: #fdeeee;
+  --error-border: #f5c6c8;
+
+  --warning: #c8850f;
+  --warning-bg: #fff6e6;
+  --warning-border: #f2ddad;
+
+  --neutral-bg: #eeecf6;
+
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --shadow-sm: 0 1px 2px rgba(20, 18, 31, 0.06);
+  --shadow-md: 0 8px 24px -8px rgba(20, 18, 31, 0.16);
+  --shadow-lg: 0 20px 48px -16px rgba(20, 18, 31, 0.22);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html,
+#root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Respect reduced-motion preferences everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- form primitives ---------- */
+.field-input,
+.field-textarea {
+  width: 100%;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.925rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.field-input:hover,
+.field-textarea:hover {
+  border-color: var(--ink-faint);
+}
+
+.field-input:focus,
+.field-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 9rem;
+  line-height: 1.5;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: var(--ink-faint);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 2px;
+}
+
+/* ---------- surfaces ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- spinner ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---------- pulsing status dot ---------- */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.55;
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+    opacity: 0;
+  }
+}
+
+.pulse-dot {
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  animation: pulse-ring 1.1s ease-out infinite;
+  color: inherit;
+}
+
+/* ---------- fade/slide for view switch ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.view-enter {
+  animation: fade-up 0.28s ease both;
+}
+
+/* scrollbar polish (non-functional, cosmetic only) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
