@@ -6,7 +6,7 @@ import com.NotificationAPI.NotificationProducer.DTO.NotificationRequest;
 import com.NotificationAPI.NotificationProducer.Service.NotificationProducer;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/notification")
-@CrossOrigin(origins = "*")
 public class SendNotification {
 
     private final NotificationProducer notificationProducer;
