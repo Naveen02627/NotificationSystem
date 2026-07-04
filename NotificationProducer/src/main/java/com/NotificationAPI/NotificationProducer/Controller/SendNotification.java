@@ -32,7 +32,7 @@ public class SendNotification {
         }
     }
 
-    @GetMapping()
+    @GetMapping("/hello")
     public String SayHello() {
 
         return "Hello I am Online";
